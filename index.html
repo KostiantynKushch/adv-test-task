@@ -36,7 +36,7 @@
 				<div class="filter-box">
 					<div class="select-box">
 						<label class="filter-label">Категория</label>
-						<select class="select-control">
+						<select class="select-control" data-category-filter>
 							<option value="0">Все</option>
 							<option value="1">Завтраки</option>
 							<option value="2">Первые блюда</option>
@@ -45,7 +45,7 @@
 					</div><!-- /.select-box -->
 					<div class="price-select-box">
 						<label class="filter-label">Цена</label>
-						<select class="select-control">
+						<select class="select-control" data-price-filter>
 							<option value="0">Все</option>
 							<option value="30">До 30 грн</option>
 							<option value="50">До 50 грн</option>
@@ -57,7 +57,7 @@
 
 
 
-				<div class="products-box grid-box">
+				<div class="products-box grid-box" data-menu>
 
 					<div class="product-box__item" data-dish="1">
 						<h3 class="product-box__title" data-title>Овсяная каша с фруктами</h3>
