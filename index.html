@@ -58,16 +58,16 @@
             <div class="products-box grid-box">
 
                 <div class="product-box__item" data-dish="1" >
-                    <h3 class="product-box__title">Овсяная каша с фруктами</h3>
+                    <h3 class="product-box__title" data-title>Овсяная каша с фруктами</h3>
                     <div class="product-box__img">
-                        <img class="img-fluid" src="i/im1.jpg">
+                        <img class="img-fluid" src="i/im1.jpg" data-img>
                     </div>
                     <div class="product-box__meta">
-                        <p>25 грн.</p>
+                        <p data-price="25">25 грн.</p>
                         <div class="qty">
-                            <input class="qty__item" type="number"> Кол
+                            <input class="qty__item" type="number" value="0" min="0" data-quantity> Кол
                         </div>
-                        <button class="product-box__btn">Добавить</button>
+                        <button class="product-box__btn" data-add>Добавить</button>
 
                     </div>
                 </div>
