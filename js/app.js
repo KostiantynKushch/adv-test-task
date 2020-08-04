@@ -12,6 +12,8 @@ const prices = document.querySelector('[data-price-filter]');
 
 
 
+
+
 // get first node as a template
 const dishTemplate = allDishes[0];
 
@@ -29,7 +31,7 @@ class Dish {
 		this.price = price;
 	}
 
-	get template() {
+	get itemNode() {
 		let itemTemplate = dishTemplate.cloneNode(true);
 
 		itemTemplate.dataset.dish = this.categoryId;
@@ -48,12 +50,12 @@ class Dish {
 
 // recording all items to array as default data
 const dataDishes = dishesToArray();
+// first default rendering
+renderDishes();
 
 
 
-
-
-// listening value changing for categories selector
+// listening value changing for categories and price selectors
 categories.addEventListener('change', () => {
 
 	// for appliing several filters
@@ -110,9 +112,11 @@ function renderDishes(filteredArray = dataDishes) {
 
 	filteredArray.forEach(item => {
 		// adding items
-		app.appendChild(item.template)
+		app.appendChild(item.itemNode)
 
 	});
+
+	addingDishes();
 }
 
 // sort dishes by category id
@@ -132,6 +136,38 @@ function sortedDishesByPrice(price, dishes = dataDishes) {
 	const sortedArray = dishes.filter(item => item.price < parseInt(price));
 
 	return sortedArray;
+}
+
+function addingDishes() {
+	const renderedDishes = app.querySelectorAll('[data-dish]');
+	// adding listener to all rendered items
+	renderedDishes.forEach(item => {
+		item.addEventListener('click', (event) => {
+
+			// check the button
+			if (event.target.hasAttribute('data-add')) {
+				const price = parseInt(event.target.parentNode.querySelector('[data-price]').dataset.price);
+				const quantity = parseInt(event.target.previousElementSibling.childNodes[1].value);
+
+				if (quantity > 0) {
+					console.log(quantity);
+					console.log(price * quantity);
+					// getting tottal quantity and price
+					const totalQuantity = document.querySelector('[data-total-quantity]');
+					const totalPrice = document.querySelector('[data-total-price]');
+					let quantityAttr = parseInt(totalQuantity.dataset.totalQuantity);
+					if (quantityAttr == 0) {
+						quantityAttr = quantity;
+						totalQuantity.innerHTML = quantityAttr;
+
+					} else {
+						quantityAttr = quantityAttr + quantity;
+						totalQuantity.innerHTML = quantityAttr;
+					}
+				}
+			}
+		})
+	});
 }
 
 /*
