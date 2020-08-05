@@ -8,8 +8,15 @@ const app = document.querySelector('[data-menu]');
 const categories = document.querySelector('[data-category-filter]');
 // getting prices selector
 const prices = document.querySelector('[data-price-filter]');
+// getting tottal quantity and price
+const totalQuantity = document.querySelector('[data-total-quantity]');
+const totalPrice = document.querySelector('[data-total-price]');
 
-
+// cart
+let cart = {
+	quantity: 0,
+	total: 0
+}
 
 
 
@@ -150,24 +157,48 @@ function addingDishes() {
 				const quantity = parseInt(event.target.previousElementSibling.childNodes[1].value);
 
 				if (quantity > 0) {
-					console.log(quantity);
-					console.log(price * quantity);
-					// getting tottal quantity and price
-					const totalQuantity = document.querySelector('[data-total-quantity]');
-					const totalPrice = document.querySelector('[data-total-price]');
-					let quantityAttr = parseInt(totalQuantity.dataset.totalQuantity);
-					if (quantityAttr == 0) {
-						quantityAttr = quantity;
-						totalQuantity.innerHTML = quantityAttr;
 
+					if (totalQuantity.dataset.totalQuantity == 0) {
+						// adding data to cart
+						cart.quantity = quantity;
+						cart.total = price * quantity;
+						// update
+						updateFrontAfterAddingProd(event.target);
 					} else {
-						quantityAttr = quantityAttr + quantity;
-						totalQuantity.innerHTML = quantityAttr;
+						// adding data to cart
+						cart.quantity += quantity;
+						cart.total += price * quantity;
+						// update
+						updateFrontAfterAddingProd(event.target);
+
 					}
 				}
 			}
 		})
 	});
+}
+
+function updateFrontAfterAddingProd(target, quantity = totalQuantity, price = totalPrice) {
+	if (!target) {
+		// update totals
+		quantity.dataset.totalQuantity = cart.quantity;
+		quantity.innerHTML = cart.quantity;
+
+		price.dataset.totalPrice = cart.total;
+		price.innerHTML = cart.total;
+	} else {
+		// update totals
+		quantity.dataset.totalQuantity = cart.quantity;
+		quantity.innerHTML = cart.quantity;
+
+		price.dataset.totalPrice = cart.total;
+		price.innerHTML = cart.total;
+
+		// update product quantity
+		target.previousElementSibling.childNodes[1].value = 0;
+	}
+
+
 }
 
 /*
