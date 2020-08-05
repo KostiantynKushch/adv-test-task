@@ -107,8 +107,8 @@ back.addEventListener('click', () => {
 // form submitting
 checkoutForm.addEventListener('submit', () => {
 	event.preventDefault();
-	const name = checkoutForm.querySelector('[name="name"]').value;
-	const email = checkoutForm.querySelector('[name="email"]').value;
+	const name = checkoutForm.querySelector('[name="name"]').value.trim();
+	const email = checkoutForm.querySelector('[name="email"]').value.trim();
 
 
 	if (name == '' && email == '') {
