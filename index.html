@@ -17,7 +17,28 @@
 					<span class="top-cart-info__item">
 						Товаров в корзине - <span class="red-info" data-total-quantity="0">XXX</span>,
 						на сумму <span class="red-info" data-total-price="0">XXX</span> грн</span>
-					<button class="btn-check">Оформить заказ</button>
+					<button class="btn-check" data-proceed>Оформить заказ</button>
+				</div>
+			</div><!-- /.top-cart-info -->
+
+		</div><!-- /.top-cart -->
+
+		<div class="top-cart top-cart--ceckout hidden" data-checkout>
+			<div class="top-cart-info">
+				<div class="container top-cart-info-container">
+					<button class="btn-check" data-back>
+						отмена </button>
+					<form action="#" data-checkout-form>
+						<label>
+							Name
+							<input type="text" name="name" placeholder="Имя">
+						</label>
+						<label>
+							Email
+							<input type="email" name="email" placeholder="example@mail.com">
+						</label>
+						<button type="submit" class="btn-check">Отправить</button>
+					</form>
 				</div>
 			</div><!-- /.top-cart-info -->
 

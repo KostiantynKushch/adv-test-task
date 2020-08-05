@@ -18,8 +18,11 @@ let cart = {
 	total: 0
 }
 
-
-
+//checkout 
+const checkout = document.querySelector('[data-checkout]');
+const checkoutForm = document.querySelector('[data-checkout-form]');
+const proceed = document.querySelector('[data-proceed]');
+const back = document.querySelector('[data-back]');
 
 // get first node as a template
 const dishTemplate = allDishes[0];
@@ -87,6 +90,41 @@ prices.addEventListener('change', () => {
 });
 
 
+// checkout
+
+// display checkout
+proceed.addEventListener('click', () => {
+	if (checkout.classList.contains('hidden') && cart.quantity > 0) {
+		checkout.classList.remove('hidden');
+	}
+});
+
+// hide checkout on back btn
+back.addEventListener('click', () => {
+	checkout.classList.add('hidden');
+});
+
+// form submitting
+checkoutForm.addEventListener('submit', () => {
+	event.preventDefault();
+	const name = checkoutForm.querySelector('[name="name"]').value;
+	const email = checkoutForm.querySelector('[name="email"]').value;
+
+
+	if (name == '' && email == '') {
+		alert('All fields should be filled!')
+	} else if (name == '') {
+		alert('Name field should be filled!')
+	} else if (email == '') {
+		alert('Email field should be filled!')
+	} else {
+		alert('Thank you for your order!');
+		checkout.classList.add('hidden');
+		cart.quantity = 0;
+		cart.total = 0;
+		updateFrontAfterAddingProd();
+	}
+});
 
 
 /*
@@ -182,10 +220,10 @@ function updateFrontAfterAddingProd(target, quantity = totalQuantity, price = to
 	if (!target) {
 		// update totals
 		quantity.dataset.totalQuantity = cart.quantity;
-		quantity.innerHTML = cart.quantity;
+		quantity.innerHTML = 'XXX';
 
 		price.dataset.totalPrice = cart.total;
-		price.innerHTML = cart.total;
+		price.innerHTML = 'XXX';
 	} else {
 		// update totals
 		quantity.dataset.totalQuantity = cart.quantity;
